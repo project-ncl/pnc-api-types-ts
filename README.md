@@ -4,7 +4,27 @@ TypeScript based types used in PNC project.
 
 This project clones **PNC project** and builds `pnc/rest-api` module to get `pnc-openapi.json` specification using `generate-openapi-spec.sh` script and transform it to `index.d.ts` using `dtsgen` command.
 
-## Generate new types and release new version
+## Releasing new version of pnc-api-types-ts
+
+### Remote & automatic (preferred)
+
+#### Option A - fully automatic
+
+New pnc-api-types-ts release is created by our jenkins instance automatically when there is new tag created in **PNC** project repository.
+
+#### Option B - one user click automatic 
+
+When you need to create new pnc-api-types-ts release from unreleased PNC revision you can go to our jenkins instance and run `pnc-api-types-release` job. Job will ask for **PNC** revision to create new release from and takes care of rest.
+
+### Local (deprecated, used if Remote is not working)
+
+#### Option C - semi manual process
+
+You need to clone repository and run release.sh script with desired **PNC** revision, after script finished you can check the result and push new release into remote repository.
+
+for example: `./release.sh 2.3.0` or `./release.sh 0bf26885ec147b815be8be6f16cf484c976364c9`
+ 
+#### Option D - completely manual process
 
 Following steps need to be performed when there are new type changes coming from PNC project.
 
