@@ -4,6 +4,14 @@ TypeScript based types used in PNC project.
 
 This project clones **PNC project** and builds `pnc/rest-api` module to get `pnc-openapi.json` specification using `generate-openapi-spec.sh` script and transform it to `index.d.ts` using `dtsgen` command.
 
+## Versioning
+
+pnc-api-types-ts release version consists of 2 parts, first part is main pnc version taken from pnc pom file project.version property, this is used as main npm version and 'v' is added in front of this version. Then there is divider in form of '-pnc-' after which there is revision of pnc project pnc-api-types-ts release is generated from. Revision could mean tag in form of '2.2.0' or in case of hash there could be short hash used. Examples: v2.3.0-pnc-2.3.0 = release generated from pnc tag '2.3.0' this is also version in project.version property so v2.3.0 is used. v2.4.0-SNAPSHOT-pnc-a696895 = release generated from pnc revision of 'a696895' short hash, this revision has 2.4.0-SNAPSHOT as pnc project.version.
+
+## Usage
+Because of our "special" versioning and type of this project, we use it as dependency in specific version and not as interval of versions or greated than specific version dependency options.
+This means we don't use `"pnc-api-types-ts": "project-ncl/pnc-api-types-ts#semver:^v2.3.0-pnc-2.3.0"`, but rather `"pnc-api-types-ts": "project-ncl/pnc-api-types-ts#v2.3.0-pnc-2.3.0"`, is recommended usage of this project as dependency.
+
 ## Releasing new version of pnc-api-types-ts
 
 ### Remote & automatic (preferred)
