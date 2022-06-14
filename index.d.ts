@@ -77,7 +77,6 @@ export interface Build {
     environment?: Environment;
     groupBuild?: GroupBuildRef;
     id: string;
-    lastUpdateTime?: string; // date-time
     noRebuildCause?: BuildRef;
     productMilestone?: ProductMilestoneRef;
     progress?: "PENDING" | "IN_PROGRESS" | "FINISHED";
@@ -259,51 +258,11 @@ export interface BuildPushResultRef {
     message?: string;
     status: "ACCEPTED" | "SUCCESS" | "REJECTED" | "FAILED" | "SYSTEM_ERROR" | "CANCELED";
 }
-export interface BuildRecordInsights {
-    autoalign?: boolean;
-    brewpullactive?: boolean;
-    buildConfigSetRecordId?: number; // int32
-    buildConfigurationId?: number; // int32
-    buildConfigurationName?: string;
-    buildConfigurationRev?: number; // int32
-    buildContentId?: string;
-    buildId?: number; // int64
-    buildType?: string;
-    endTime?: string; // date-time
-    executionRootName?: string;
-    executionRootVersion?: string;
-    lastUpdateTime?: string; // date-time
-    productId?: number; // int32
-    productMilestoneId?: number; // int32
-    productMilestoneVersion?: string;
-    productName?: string;
-    productVersionId?: number; // int32
-    productVersionVersion?: string;
-    projectId?: number; // int32
-    projectName?: string;
-    startTime?: string; // date-time
-    status?: string;
-    submitMonth?: number; // int32
-    submitQuarter?: number; // int32
-    submitTime?: string; // date-time
-    submitYear?: number; // int32
-    temporarybuild?: boolean;
-    userId?: number; // int32
-    username?: string;
-}
-export interface BuildRecordInsightsPage {
-    content?: BuildRecordInsights[];
-    pageIndex?: number; // int32
-    pageSize?: number; // int32
-    totalHits?: number; // int32
-    totalPages?: number; // int32
-}
 export interface BuildRef {
     buildContentId?: string;
     buildOutputChecksum?: string;
     endTime?: string; // date-time
     id: string;
-    lastUpdateTime?: string; // date-time
     progress?: "PENDING" | "IN_PROGRESS" | "FINISHED";
     scmRevision?: string;
     scmTag?: string;
@@ -474,13 +433,6 @@ export interface PageBuildConfigurationWithLatestBuild {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
-export interface PageBuildRecordInsights {
-    content?: BuildRecordInsights[];
-    pageIndex?: number; // int32
-    pageSize?: number; // int32
-    totalHits?: number; // int32
-    totalPages?: number; // int32
-}
 export interface PageEnvironment {
     content?: Environment[];
     pageIndex?: number; // int32
@@ -614,7 +566,6 @@ export interface Product {
     };
 }
 export interface ProductMilestone {
-    deliveredArtifactsImporter?: User;
     distributedArtifactsImporter?: User;
     endDate?: string; // date-time
     id: string;
