@@ -1,6 +1,6 @@
 {
   "name" : "@project-ncl/pnc-api-types-ts",
-  "version" : "2.1.0-SNAPSHOT-pnc-1dcd3a7",
+  "version" : "2.1.0-SNAPSHOT-pnc-f7ac784",
   "devDependencies" : {
     "dtsgenerator" : "^2.7.0",
     "replace" : "^1.2.1"
