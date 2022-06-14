@@ -19,7 +19,6 @@ export interface Artifact {
     modificationUser?: User;
     originUrl?: string;
     publicUrl?: string;
-    purl?: string;
     qualityLevelReason?: string;
     sha1?: string;
     sha256?: string;
