@@ -56,6 +56,9 @@ popd
 #using project-manipulator to update package.json version to new generated one
 java -jar .tmp/project-manipulator-cli-1.1.0.jar -f package.json -DversionOverride=${NPM_VERSION}
 
+#installing dependencies required for generation and updating version in package-lock
+npm install
+
 npm run generate:dts
 
 rm -rf .tmp
