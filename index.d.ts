@@ -67,6 +67,7 @@ export interface Banner {
     banner?: string;
 }
 export interface Build {
+    alignmentPreference?: "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     attributes?: {
         [name: string]: string;
     };
@@ -259,7 +260,47 @@ export interface BuildPushResultRef {
     message?: string;
     status: "ACCEPTED" | "SUCCESS" | "REJECTED" | "FAILED" | "SYSTEM_ERROR" | "CANCELED";
 }
+export interface BuildRecordInsights {
+    autoalign?: boolean;
+    brewpullactive?: boolean;
+    buildConfigSetRecordId?: number; // int32
+    buildConfigurationId?: number; // int32
+    buildConfigurationName?: string;
+    buildConfigurationRev?: number; // int32
+    buildContentId?: string;
+    buildId?: number; // int64
+    buildType?: string;
+    endTime?: string; // date-time
+    executionRootName?: string;
+    executionRootVersion?: string;
+    lastUpdateTime?: string; // date-time
+    productId?: number; // int32
+    productMilestoneId?: number; // int32
+    productMilestoneVersion?: string;
+    productName?: string;
+    productVersionId?: number; // int32
+    productVersionVersion?: string;
+    projectId?: number; // int32
+    projectName?: string;
+    startTime?: string; // date-time
+    status?: string;
+    submitMonth?: number; // int32
+    submitQuarter?: number; // int32
+    submitTime?: string; // date-time
+    submitYear?: number; // int32
+    temporarybuild?: boolean;
+    userId?: number; // int32
+    username?: string;
+}
+export interface BuildRecordInsightsPage {
+    content?: BuildRecordInsights[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface BuildRef {
+    alignmentPreference?: "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     buildContentId?: string;
     buildOutputChecksum?: string;
     endTime?: string; // date-time
@@ -318,6 +359,7 @@ export interface GraphBuild {
     };
 }
 export interface GroupBuild {
+    alignmentPreference?: "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     endTime?: string; // date-time
     groupConfig?: GroupConfigurationRef;
     id: string;
@@ -338,6 +380,7 @@ export interface GroupBuildPushRequest {
     tagPrefix?: string;
 }
 export interface GroupBuildRef {
+    alignmentPreference?: "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     endTime?: string; // date-time
     id: string;
     startTime?: string; // date-time
@@ -435,6 +478,13 @@ export interface PageBuildConfigurationWithLatestBuild {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface PageBuildRecordInsights {
+    content?: BuildRecordInsights[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface PageEnvironment {
     content?: Environment[];
     pageIndex?: number; // int32
@@ -517,6 +567,7 @@ export interface Parameter {
     name?: string;
 }
 export namespace Parameters {
+    export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     export type Attribute = string[];
     export type BuildCategories = ("STANDARD" | "SERVICE")[];
     export type BuildConfigName = string;
