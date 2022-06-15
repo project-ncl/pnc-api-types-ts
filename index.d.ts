@@ -19,6 +19,7 @@ export interface Artifact {
     modificationUser?: User;
     originUrl?: string;
     publicUrl?: string;
+    purl?: string;
     qualityLevelReason?: string;
     sha1?: string;
     sha256?: string;
@@ -76,6 +77,7 @@ export interface Build {
     environment?: Environment;
     groupBuild?: GroupBuildRef;
     id: string;
+    lastUpdateTime?: string; // date-time
     noRebuildCause?: BuildRef;
     productMilestone?: ProductMilestoneRef;
     progress?: "PENDING" | "IN_PROGRESS" | "FINISHED";
@@ -262,6 +264,7 @@ export interface BuildRef {
     buildOutputChecksum?: string;
     endTime?: string; // date-time
     id: string;
+    lastUpdateTime?: string; // date-time
     progress?: "PENDING" | "IN_PROGRESS" | "FINISHED";
     scmRevision?: string;
     scmTag?: string;
@@ -565,6 +568,7 @@ export interface Product {
     };
 }
 export interface ProductMilestone {
+    deliveredArtifactsImporter?: User;
     distributedArtifactsImporter?: User;
     endDate?: string; // date-time
     id: string;
