@@ -34,6 +34,12 @@ pushd pnc
 
 git reset --hard ${PNC_REV}
 
+PNC_BRANCH=$(git branch --show-current)
+
+if [ ${PNC_REV} = ${PNC_BRANCH} ]; then
+   PNC_VER=$(git rev-parse --short ${PNC_REV});
+fi 
+
 pushd rest-api
 
 mvn clean install -DskipTests
