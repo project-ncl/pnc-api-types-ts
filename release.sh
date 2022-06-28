@@ -34,7 +34,7 @@ pushd pnc
 
 git reset --hard ${PNC_REV}
 
-PNC_BRANCH=$(git branch --show-current)
+PNC_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ ${PNC_REV} = ${PNC_BRANCH} ]; then
    PNC_VER=$(git rev-parse --short ${PNC_REV});
