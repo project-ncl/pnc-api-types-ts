@@ -40,7 +40,14 @@ if [ ${PNC_REV} = ${PNC_BRANCH} ]; then
    PNC_VER=$(git rev-parse --short ${PNC_REV});
 fi 
 
-pushd rest-api
+REST_API_DIR=rest-api
+
+if [ ! -d ${REST_API_DIR} ]; then
+    echo "${REST_API_DIR} does NOT exist, exiting"
+    exit
+fi
+
+pushd ${REST_API_DIR}
 
 mvn clean install -DskipTests
 
