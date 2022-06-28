@@ -44,7 +44,7 @@ REST_API_DIR=rest-api
 
 if [ ! -d ${REST_API_DIR} ]; then
     echo "${REST_API_DIR} does NOT exist, exiting"
-    exit
+    exit 1
 fi
 
 pushd ${REST_API_DIR}
@@ -85,3 +85,4 @@ git tag ${NPM_TAG}
 echo "
 WE ARE DONE, you can check result and if you are satisfied push it.
 Simply run 'git push && git push --tags'"
+exit 0
