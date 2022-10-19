@@ -1,0 +1,61 @@
+# https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  release-script:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # Each version of Node.js specified in the node-version array creates a job that runs the same steps.
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "adopt"
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Print versions
+        run: |
+          node --version && npm --version
+          mvn -v
+      - name: Set git user information
+        run: |
+          git config --global user.email "workflowsTester@test.com"
+          git config --global user.name "workflowsTester"
+      - name: Run release script
+        # 2.2.2 ==> does not exist on pnc-api-types-ts, but does on the pnc repo
+        run: ./release.sh 2.2.2
+        shell: bash
+
+  check-package-lock:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # Each version of Node.js specified in the node-version array creates a job that runs the same steps.
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: node --version && npm --version
+      - run: npm install
+      - name: Fail if npm install changed package-lock.json
+        run: git diff --exit-code package-lock.json
