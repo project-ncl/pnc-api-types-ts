@@ -66,6 +66,13 @@ echo "Using generated npm version: ${NPM_VERSION}"
 
 popd
 
+#check if this version is already released
+
+if [ $(git tag -l "v$NPM_VERSION") ]; then
+  echo "This version was already released."
+  exit 69
+else
+
 #using project-manipulator to update package.json version to new generated one
 java -jar .tmp/project-manipulator-cli-1.1.0.jar -f package.json -DversionOverride=${NPM_VERSION}
 
@@ -81,6 +88,8 @@ git add .
 git commit -m "PNC api types for release ${NPM_VERSION}"
 
 git tag ${NPM_TAG}
+
+fi
 
 echo "
 WE ARE DONE, you can check result and if you are satisfied push it.
