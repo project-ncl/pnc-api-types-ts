@@ -782,7 +782,7 @@ export interface Project {
     engineeringTeam?: string;
     id: string;
     issueTrackerUrl?: string;
-    name?: string;
+    name: string;
     projectUrl?: string;
     technicalLeader?: string;
 }
@@ -798,7 +798,7 @@ export interface ProjectRef {
     engineeringTeam?: string;
     id: string;
     issueTrackerUrl?: string;
-    name?: string;
+    name: string;
     projectUrl?: string;
     technicalLeader?: string;
 }
