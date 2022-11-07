@@ -18,11 +18,11 @@ This means we don't use `"pnc-api-types-ts": "project-ncl/pnc-api-types-ts#semve
 
 #### Option A - fully automatic
 
-New pnc-api-types-ts release is created by our jenkins instance automatically when there is new tag created in **PNC** project repository.
+New pnc-api-types-ts release is created by our jenkins instance automatically, job `pnc-api-types-ts-release-automatic` is daily checking if new tag is created in **PNC** project repository, if yes, new release for `pnc-api-types-ts` is created.
 
 #### Option B - one user click automatic 
 
-When you need to create new pnc-api-types-ts release from unreleased PNC revision you can go to our jenkins instance and run `pnc-api-types-release` job. Job will ask for **PNC** revision to create new release from and takes care of rest.
+When you need to create new pnc-api-types-ts release from unreleased PNC revision you can go to our jenkins instance and run `pnc-api-types-ts-release-manual` job. Job will ask for **PNC** revision to create new release from and takes care of rest.
 
 ### Local (deprecated, used if Remote is not working)
 
