@@ -33,6 +33,11 @@ jobs:
           git --version
           node --version && npm --version
           mvn -v
+      - name: Update NPM
+        run: |
+          npm --version
+          npm install -g npm@^9.1.0
+          npm --version
       - name: Set git user information
         run: |
           git config --global user.email "workflowsTester@test.com"
@@ -57,6 +62,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: node --version && npm --version
+      - run: npm install -g npm@^9.1.0
+      - run: npm --version
       - run: npm install
       - name: Fail if npm install changed package-lock.json
         run: git diff --exit-code package-lock.json
