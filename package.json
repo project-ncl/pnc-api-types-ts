@@ -9,9 +9,7 @@
   "scripts": {
     "clean": "rm -rf .tmp dist",
     "nuke": "npm run clean && rm -rf node_modules",
-    "generate:openapi": "./generate-openapi-spec.sh 2.3.0",
-    "generate:dts": "dtsgen -n \"\" -o ./index.d.ts ./.tmp/pnc-openapi.json && replace 'declare' 'export' index.d.ts",
-    "build": "npm run clean && npm run generate:openapi && npm run generate:dts"
+    "generate:dts": "dtsgen -n \"\" -o ./index.d.ts ./.tmp/pnc-openapi.json && replace 'declare' 'export' index.d.ts"
   },
   "dependencies": {
     "npx": "^10.2.2"
