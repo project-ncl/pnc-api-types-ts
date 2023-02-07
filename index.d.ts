@@ -5,7 +5,7 @@ export interface AlignmentParameters {
 export interface Artifact {
     artifactQuality: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
     build?: Build;
-    buildCategory: "STANDARD" | "SERVICE";
+    buildCategory: "STANDARD" | "SERVICE" | "AUTO";
     creationTime?: string; // date-time
     creationUser?: User;
     deployPath?: string;
@@ -28,7 +28,7 @@ export interface Artifact {
 }
 export interface ArtifactInfo {
     artifactQuality?: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
-    buildCategory?: "STANDARD" | "SERVICE";
+    buildCategory?: "STANDARD" | "SERVICE" | "AUTO";
     id?: string;
     identifier?: string;
     repositoryType?: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
@@ -49,7 +49,7 @@ export interface ArtifactPage {
 }
 export interface ArtifactRevision {
     artifactQuality?: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
-    buildCategory?: "STANDARD" | "SERVICE";
+    buildCategory?: "STANDARD" | "SERVICE" | "AUTO";
     id: string;
     modificationTime?: string; // date-time
     modificationUser?: User;
@@ -603,7 +603,7 @@ export interface Parameter {
 export namespace Parameters {
     export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     export type Attribute = string[];
-    export type BuildCategories = ("STANDARD" | "SERVICE")[];
+    export type BuildCategories = ("STANDARD" | "SERVICE" | "AUTO")[];
     export type BuildConfigName = string;
     export type BuildDependencies = boolean;
     export type BuildType = string;
@@ -813,7 +813,7 @@ export interface QueryParameters {
 }
 export interface RepositoryCreationResponse {
     repository?: SCMRepository;
-    taskId?: number; // int32
+    taskId?: number; // int64
 }
 export type RequestBody = TargetRepository;
 export namespace Responses {
