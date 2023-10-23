@@ -83,6 +83,8 @@ export interface Build {
     productMilestone?: ProductMilestoneRef;
     progress?: "PENDING" | "IN_PROGRESS" | "FINISHED";
     project?: ProjectRef;
+    scmBuildConfigRevision?: string;
+    scmBuildConfigRevisionInternal?: boolean;
     scmRepository?: SCMRepository;
     scmRevision?: string;
     scmTag?: string;
@@ -307,6 +309,8 @@ export interface BuildRef {
     id: string;
     lastUpdateTime?: string; // date-time
     progress?: "PENDING" | "IN_PROGRESS" | "FINISHED";
+    scmBuildConfigRevision?: string;
+    scmBuildConfigRevisionInternal?: boolean;
     scmRevision?: string;
     scmTag?: string;
     scmUrl?: string;
