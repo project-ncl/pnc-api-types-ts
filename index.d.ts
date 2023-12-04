@@ -2,6 +2,25 @@ export interface AlignmentParameters {
     buildType?: string;
     parameters?: string;
 }
+export interface AnalyzedArtifact {
+    archiveFilenames?: string[];
+    archiveUnmatchedFilenames?: string[];
+    artifact?: Artifact;
+    brewId?: number; // int64
+    builtFromSource?: boolean;
+    distribution?: AnalyzedDistribution;
+}
+export interface AnalyzedArtifactPage {
+    content?: AnalyzedArtifact[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
+export interface AnalyzedDistribution {
+    creationTime?: string; // date-time
+    distributionUrl?: string;
+}
 export interface Artifact {
     artifactQuality: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
     build?: Build;
@@ -329,6 +348,20 @@ export interface CreateAndSyncSCMRequest {
     preBuildSyncEnabled?: boolean;
     scmUrl: string;
 }
+export interface DeliverableAnalyzerLabelEntry {
+    change?: "ADDED" | "REMOVED";
+    date?: string; // date-time
+    label?: "DELETED" | "SCRATCH" | "RELEASED";
+    reason?: string;
+    user?: User;
+}
+export interface DeliverableAnalyzerLabelEntryPage {
+    content?: DeliverableAnalyzerLabelEntry[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface DeliverableAnalyzerOperation {
     endTime?: string; // date-time
     id: string;
@@ -349,8 +382,30 @@ export interface DeliverableAnalyzerOperationPage {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface DeliverableAnalyzerReport {
+    endTime?: string; // date-time
+    id?: string;
+    labels?: ("DELETED" | "SCRATCH" | "RELEASED")[];
+    productMilestone?: ProductMilestoneRef;
+    startTime?: string; // date-time
+    submitTime?: string; // date-time
+    urls?: string[];
+    user?: User;
+}
+export interface DeliverableAnalyzerReportLabelRequest {
+    label?: "DELETED" | "SCRATCH" | "RELEASED";
+    reason?: string;
+}
+export interface DeliverableAnalyzerReportPage {
+    content?: DeliverableAnalyzerReport[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface DeliverablesAnalysisRequest {
     deliverablesUrls: string[];
+    runAsScratchAnalysis?: boolean;
 }
 export interface EdgeBuild {
     cost?: number; // int32
@@ -456,6 +511,13 @@ export interface MilestoneInfoPage {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface PageAnalyzedArtifact {
+    content?: AnalyzedArtifact[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface PageArtifact {
     content?: Artifact[];
     pageIndex?: number; // int32
@@ -512,8 +574,22 @@ export interface PageBuildRecordInsights {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface PageDeliverableAnalyzerLabelEntry {
+    content?: DeliverableAnalyzerLabelEntry[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface PageDeliverableAnalyzerOperation {
     content?: DeliverableAnalyzerOperation[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
+export interface PageDeliverableAnalyzerReport {
+    content?: DeliverableAnalyzerReport[];
     pageIndex?: number; // int32
     pageSize?: number; // int32
     totalHits?: number; // int32
@@ -860,6 +936,9 @@ export interface SCMRepositoryPage {
 export interface SSHCredentials {
     command?: string;
     password?: string;
+}
+export interface ScratchDeliverablesAnalysisRequest {
+    deliverablesUrls: string[];
 }
 export interface TargetRepository {
     id: string;
