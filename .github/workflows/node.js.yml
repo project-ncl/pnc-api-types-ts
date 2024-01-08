@@ -8,8 +8,8 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron:  '00 03 * * *'
-    - cron:  '00 11 * * *'
+    - cron: "00 03 * * *"
+    - cron: "00 11 * * *"
 
 jobs:
   release-script:
@@ -28,7 +28,7 @@ jobs:
           java-version: "11"
           distribution: "adopt"
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: Print versions
@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - run: node --version && npm --version
