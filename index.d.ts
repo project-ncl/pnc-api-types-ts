@@ -2,6 +2,12 @@ export interface AlignmentParameters {
     buildType?: string;
     parameters?: string;
 }
+export interface AlignmentStrategy {
+    allowList?: string;
+    denyList?: string;
+    dependencyOverride?: string;
+    ranks?: string[];
+}
 export interface AnalyzedArtifact {
     archiveFilenames?: string[];
     archiveUnmatchedFilenames?: string[];
@@ -50,6 +56,9 @@ export interface ArtifactInfo {
     buildCategory?: "STANDARD" | "SERVICE" | "AUTO";
     id?: string;
     identifier?: string;
+    qualifiers?: {
+        [name: string]: string[];
+    };
     repositoryType?: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
 }
 export interface ArtifactInfoPage {
@@ -145,6 +154,7 @@ export interface BuildConfigWithSCMRequest {
     scmUrl: string;
 }
 export interface BuildConfiguration {
+    alignmentStrategies?: AlignmentStrategy[];
     brewPullActive?: boolean;
     buildScript?: string;
     buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
@@ -184,6 +194,7 @@ export interface BuildConfigurationRef {
     scmRevision?: string;
 }
 export interface BuildConfigurationRevision {
+    alignmentStrategies?: AlignmentStrategy[];
     brewPullActive?: boolean;
     buildScript?: string;
     buildType?: "MVN" | "NPM" | "GRADLE" | "SBT";
@@ -216,6 +227,7 @@ export interface BuildConfigurationRevisionRef {
     scmRevision?: string;
 }
 export interface BuildConfigurationWithLatestBuild {
+    alignmentStrategies?: AlignmentStrategy[];
     brewPullActive?: boolean;
     buildScript?: string;
     buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
@@ -343,6 +355,13 @@ export interface BuildsGraph {
     vertices?: {
         [name: string]: VertexBuild;
     };
+}
+export interface ComponentVersion {
+    builtOn?: string; // date-time
+    commit?: string;
+    components?: ComponentVersion[];
+    name?: string;
+    version?: string;
 }
 export interface CreateAndSyncSCMRequest {
     preBuildSyncEnabled?: boolean;
@@ -637,8 +656,22 @@ export interface PageProductMilestone {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface PageProductMilestoneArtifactQualityStatistics {
+    content?: ProductMilestoneArtifactQualityStatistics[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface PageProductMilestoneCloseResult {
     content?: ProductMilestoneCloseResult[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
+export interface PageProductMilestoneRepositoryTypeStatistics {
+    content?: ProductMilestoneRepositoryTypeStatistics[];
     pageIndex?: number; // int32
     pageSize?: number; // int32
     totalHits?: number; // int32
@@ -703,6 +736,7 @@ export namespace Parameters {
     export type PageSize = number; // int32
     export type Purl = string;
     export type Q = string;
+    export type Qualifiers = QValue[];
     export type Qualities = ("NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED")[];
     export type Quality = string;
     export type Reason = string;
@@ -748,6 +782,12 @@ export interface ProductMilestone {
     startingDate?: string; // date-time
     version: string; // ^[0-9]+\.[0-9]+(\.\w[\w-]*)+$
 }
+export interface ProductMilestoneArtifactQualityStatistics {
+    artifactQuality?: {
+        [name: string]: number; // int64
+    };
+    productMilestone?: ProductMilestoneRef;
+}
 export interface ProductMilestoneCloseResult {
     buildPushResults?: BuildPushResultRef[];
     endDate?: string; // date-time
@@ -769,6 +809,13 @@ export interface ProductMilestoneCloseResultRef {
     startingDate: string; // date-time
     status: "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SYSTEM_ERROR";
 }
+export interface ProductMilestoneDeliveredArtifactsStatistics {
+    noBuild?: number; // int64
+    noMilestone?: number; // int64
+    otherMilestones?: number; // int64
+    otherProducts?: number; // int64
+    thisMilestone?: number; // int64
+}
 export interface ProductMilestonePage {
     content?: ProductMilestone[];
     pageIndex?: number; // int32
@@ -782,6 +829,22 @@ export interface ProductMilestoneRef {
     plannedEndDate?: string; // date-time
     startingDate?: string; // date-time
     version: string; // ^[0-9]+\.[0-9]+(\.\w[\w-]*)+$
+}
+export interface ProductMilestoneRepositoryTypeStatistics {
+    productMilestone?: ProductMilestoneRef;
+    repositoryType?: {
+        [name: string]: number; // int64
+    };
+}
+export interface ProductMilestoneStatistics {
+    artifactQuality?: {
+        [name: string]: number; // int64
+    };
+    artifactsInMilestone?: number; // int64
+    deliveredArtifactsSource?: ProductMilestoneDeliveredArtifactsStatistics;
+    repositoryType?: {
+        [name: string]: number; // int64
+    };
 }
 export interface ProductPage {
     content?: Product[];
@@ -844,6 +907,20 @@ export interface ProductVersion {
     };
     version: string; // ^[0-9]+\.[0-9]+$
 }
+export interface ProductVersionArtifactQualityStatisticsPage {
+    content?: ProductMilestoneArtifactQualityStatistics[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
+export interface ProductVersionDeliveredArtifactsStatistics {
+    noBuild?: number; // int64
+    noMilestone?: number; // int64
+    otherProducts?: number; // int64
+    otherVersions?: number; // int64
+    thisVersion?: number; // int64
+}
 export interface ProductVersionPage {
     content?: ProductVersion[];
     pageIndex?: number; // int32
@@ -857,6 +934,20 @@ export interface ProductVersionRef {
     };
     id: string;
     version: string; // ^[0-9]+\.[0-9]+$
+}
+export interface ProductVersionRepositoryTypeStatisticsPage {
+    content?: ProductMilestoneRepositoryTypeStatistics[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
+export interface ProductVersionStatistics {
+    artifactsInVersion?: number; // int64
+    deliveredArtifactsSource?: ProductVersionDeliveredArtifactsStatistics;
+    milestoneDependencies?: number; // int64
+    milestones?: number; // int64
+    productDependencies?: number; // int64
 }
 export interface Project {
     buildConfigs?: {
@@ -886,6 +977,10 @@ export interface ProjectRef {
     projectUrl?: string;
     technicalLeader?: string;
 }
+export interface QValue {
+    qualifier?: "PRODUCT_ID" | "PRODUCT" | "VERSION_ID" | "VERSION" | "MILESTONE_ID" | "MILESTONE" | "GROUP_BUILD" | "BUILD" | "BUILD_CONFIG_ID" | "BUILD_CONFIG" | "GROUP_CONFIG_ID" | "GROUP_CONFIG" | "DEPENDENCY" | "QUALITY";
+    value?: string[];
+}
 export interface QueryParameters {
     pageIndex?: Parameters.PageIndex; // int32
     pageSize?: Parameters.PageSize; // int32
@@ -901,7 +996,7 @@ export interface RepositoryCreationResponse {
 }
 export type RequestBody = TargetRepository;
 export namespace Responses {
-    export type $200 = BuildPage;
+    export type $200 = ComponentVersion;
     export type $201 = TargetRepository;
     export type $202 = RepositoryCreationResponse;
     export interface $204 {
