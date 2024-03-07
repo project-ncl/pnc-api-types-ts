@@ -2,12 +2,6 @@ export interface AlignmentParameters {
     buildType?: string;
     parameters?: string;
 }
-export interface AlignmentStrategy {
-    allowList?: string;
-    denyList?: string;
-    dependencyOverride?: string;
-    ranks?: string[];
-}
 export interface AnalyzedArtifact {
     archiveFilenames?: string[];
     archiveUnmatchedFilenames?: string[];
@@ -56,9 +50,6 @@ export interface ArtifactInfo {
     buildCategory?: "STANDARD" | "SERVICE" | "AUTO";
     id?: string;
     identifier?: string;
-    qualifiers?: {
-        [name: string]: string[];
-    };
     repositoryType?: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
 }
 export interface ArtifactInfoPage {
@@ -154,7 +145,6 @@ export interface BuildConfigWithSCMRequest {
     scmUrl: string;
 }
 export interface BuildConfiguration {
-    alignmentStrategies?: AlignmentStrategy[];
     brewPullActive?: boolean;
     buildScript?: string;
     buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
@@ -194,7 +184,6 @@ export interface BuildConfigurationRef {
     scmRevision?: string;
 }
 export interface BuildConfigurationRevision {
-    alignmentStrategies?: AlignmentStrategy[];
     brewPullActive?: boolean;
     buildScript?: string;
     buildType?: "MVN" | "NPM" | "GRADLE" | "SBT";
@@ -227,7 +216,6 @@ export interface BuildConfigurationRevisionRef {
     scmRevision?: string;
 }
 export interface BuildConfigurationWithLatestBuild {
-    alignmentStrategies?: AlignmentStrategy[];
     brewPullActive?: boolean;
     buildScript?: string;
     buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
@@ -736,7 +724,6 @@ export namespace Parameters {
     export type PageSize = number; // int32
     export type Purl = string;
     export type Q = string;
-    export type Qualifiers = QValue[];
     export type Qualities = ("NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED")[];
     export type Quality = string;
     export type Reason = string;
@@ -759,6 +746,11 @@ export namespace Parameters {
 }
 export interface PathParameters {
     id: Parameters.Id;
+}
+export interface PncStatus {
+    banner?: string;
+    eta?: string; // date-time
+    isMaintenanceMode: boolean;
 }
 export interface Product {
     abbreviation: string; // [a-zA-Z0-9-]+
@@ -976,10 +968,6 @@ export interface ProjectRef {
     name: string;
     projectUrl?: string;
     technicalLeader?: string;
-}
-export interface QValue {
-    qualifier?: "PRODUCT_ID" | "PRODUCT" | "VERSION_ID" | "VERSION" | "MILESTONE_ID" | "MILESTONE" | "GROUP_BUILD" | "BUILD" | "BUILD_CONFIG_ID" | "BUILD_CONFIG" | "GROUP_CONFIG_ID" | "GROUP_CONFIG" | "DEPENDENCY" | "QUALITY";
-    value?: string[];
 }
 export interface QueryParameters {
     pageIndex?: Parameters.PageIndex; // int32
