@@ -20,6 +20,9 @@ export interface AnalyzedArtifactPage {
 export interface AnalyzedDistribution {
     creationTime?: string; // date-time
     distributionUrl?: string;
+    md5?: string;
+    sha1?: string;
+    sha256?: string;
 }
 export interface Artifact {
     artifactQuality: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
