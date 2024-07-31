@@ -9,6 +9,7 @@ export interface AnalyzedArtifact {
     brewId?: number; // int64
     builtFromSource?: boolean;
     distribution?: AnalyzedDistribution;
+    licenses?: LicenseInfo[];
 }
 export interface AnalyzedArtifactPage {
     content?: AnalyzedArtifact[];
@@ -501,6 +502,14 @@ export interface GroupConfigurationRef {
     id: string;
     name: string;
 }
+export interface LicenseInfo {
+    comments?: string;
+    distribution?: string;
+    name?: string;
+    source?: "UNKNOWN" | "POM" | "POM_XML" | "BUNDLE_LICENSE" | "TEXT";
+    spdxLicenseId?: string;
+    url?: string;
+}
 export interface MilestoneInfo {
     built?: boolean;
     milestoneEndDate?: string; // date-time
@@ -735,12 +744,10 @@ export namespace Parameters {
     export type Result = "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
     export type Rev = number; // int32
     export type Running = boolean;
-    export type Search = string;
     export type SearchUrl = string;
     export type Sha1 = string;
     export type Sha256 = string;
     export type Sort = string;
-    export type Status = "SUCCESS" | "FAILED" | "NO_REBUILD_REQUIRED" | "ENQUEUED" | "WAITING_FOR_DEPENDENCIES" | "BUILDING" | "REJECTED" | "REJECTED_FAILED_DEPENDENCIES" | "CANCELLED" | "SYSTEM_ERROR" | "NEW";
     export type TemporaryBuild = boolean;
     export type Timestamp = number; // int64
     export type TimestampAlignment = boolean;
