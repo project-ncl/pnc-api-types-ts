@@ -275,6 +275,7 @@ export interface BuildPushResult {
     message?: string;
     productMilestoneCloseResult?: ProductMilestoneCloseResultRef;
     status: "ACCEPTED" | "SUCCESS" | "REJECTED" | "FAILED" | "SYSTEM_ERROR" | "CANCELED";
+    userInitiator?: string;
 }
 export interface BuildPushResultRef {
     brewBuildId?: number; // int32
@@ -284,6 +285,7 @@ export interface BuildPushResultRef {
     logContext?: string;
     message?: string;
     status: "ACCEPTED" | "SUCCESS" | "REJECTED" | "FAILED" | "SYSTEM_ERROR" | "CANCELED";
+    userInitiator?: string;
 }
 export interface BuildRecordInsights {
     autoalign?: boolean;
