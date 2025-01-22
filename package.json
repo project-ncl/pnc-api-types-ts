@@ -1,21 +1,21 @@
 {
-  "name" : "@project-ncl/pnc-api-types-ts",
-  "version" : "3.1.2-pnc-3.1.2.RC1",
-  "devDependencies" : {
-    "dtsgenerator" : "^2.7.0",
-    "replace" : "^1.2.1"
+  "name": "@project-ncl/pnc-api-types-ts",
+  "version": "3.1.2-pnc-3.1.2.RC1",
+  "devDependencies": {
+    "dtsgenerator": "^2.7.0",
+    "replace": "^1.2.1"
   },
-  "types" : "index.d.ts",
-  "scripts" : {
-    "clean" : "rm -rf .tmp dist",
-    "nuke" : "npm run clean && rm -rf node_modules",
-    "generate:dts" : "dtsgen -n \"\" -o ./index.d.ts ./.tmp/pnc-openapi.json && replace 'declare' 'export' index.d.ts"
+  "types": "index.d.ts",
+  "scripts": {
+    "clean": "rm -rf .tmp dist",
+    "nuke": "npm run clean && rm -rf node_modules",
+    "generate:dts": "dtsgen -n \"\" -o ./index.d.ts ./.tmp/pnc-openapi.json && replace 'declare' 'export' index.d.ts"
   },
-  "dependencies" : {
-    "npx" : "^10.2.2"
+  "dependencies": {
+    "npx": "^10.2.2"
   },
-  "engines" : {
-    "node" : "^20.10.0",
-    "npm" : "^10.2.5"
+  "engines": {
+    "node": "^22.13.0",
+    "npm": "^11.0.0"
   }
 }
