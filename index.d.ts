@@ -420,6 +420,12 @@ export interface DeliverablesAnalysisRequest {
     deliverablesUrls: string[];
     runAsScratchAnalysis?: boolean;
 }
+export interface DeliveredArtifactInMilestones {
+    artifactIdentifierPrefix?: string;
+    productMilestoneArtifacts?: {
+        [name: string]: ParsedArtifact[];
+    };
+}
 export interface EdgeBuild {
     cost?: number; // int32
     source?: string;
@@ -443,6 +449,7 @@ export interface EnvironmentDeprecationRequest {
 }
 export interface ErrorResponse {
     details?: {
+        [key: string]: any;
     };
     errorMessage?: string;
     errorType?: string;
@@ -718,46 +725,11 @@ export interface Parameter {
     description?: string;
     name?: string;
 }
-export namespace Parameters {
-    export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
-    export type Attribute = string[];
-    export type BuildCategories = ("STANDARD" | "SERVICE" | "AUTO")[];
-    export type BuildConfigName = string;
-    export type BuildDependencies = boolean;
-    export type BuildType = string;
-    export type Callback = string;
-    export type ConfigId = string;
-    export type DepId = string;
-    export type Id = string;
-    export type Identifier = string;
-    export type KeepPodOnFailure = boolean;
-    export type Key = string;
-    export type Latest = boolean;
-    export type Md5 = string;
-    export type PageIndex = number; // int32
-    export type PageSize = number; // int32
-    export type Purl = string;
-    export type Q = string;
-    export type Qualities = ("NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED")[];
-    export type Quality = string;
-    export type Reason = string;
-    export type RebuildMode = "IMPLICIT_DEPENDENCY_CHECK" | "EXPLICIT_DEPENDENCY_CHECK" | "FORCE";
-    export type RepoType = "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
-    export type Result = "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
-    export type Rev = number; // int32
-    export type Running = boolean;
-    export type SearchUrl = string;
-    export type Sha1 = string;
-    export type Sha256 = string;
-    export type Sort = string;
-    export type TemporaryBuild = boolean;
-    export type Timestamp = number; // int64
-    export type TimestampAlignment = boolean;
-    export type Url = string;
-    export type Value = string;
-}
-export interface PathParameters {
-    id: Parameters.Id;
+export interface ParsedArtifact {
+    artifactVersion?: string;
+    classifier?: string;
+    id?: string;
+    type?: string;
 }
 export interface PncStatus {
     banner?: string;
@@ -981,34 +953,9 @@ export interface ProjectRef {
     projectUrl?: string;
     technicalLeader?: string;
 }
-export interface QueryParameters {
-    pageIndex?: Parameters.PageIndex; // int32
-    pageSize?: Parameters.PageSize; // int32
-    sort?: Parameters.Sort;
-    q?: Parameters.Q;
-    latest?: Parameters.Latest;
-    running?: Parameters.Running;
-    buildConfigName?: Parameters.BuildConfigName;
-}
 export interface RepositoryCreationResponse {
     repository?: SCMRepository;
     taskId?: number; // int64
-}
-export type RequestBody = TargetRepository;
-export namespace Responses {
-    export type $200 = ComponentVersion;
-    export type $201 = TargetRepository;
-    export type $202 = RepositoryCreationResponse;
-    export interface $204 {
-    }
-    export interface $302 {
-    }
-    export type $400 = ErrorResponse;
-    export type $403 = ErrorResponse;
-    export interface $404 {
-    }
-    export type $409 = ErrorResponse;
-    export type $500 = ErrorResponse;
 }
 export interface RunningBuildCount {
     enqueued?: number; // int32
@@ -1067,3 +1014,2167 @@ export interface VertexBuild {
     dataType?: string;
     name?: string;
 }
+export type RequestBody = string;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Key = string;
+export type Value = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    key: Parameters.Key;
+    value: Parameters.Value;
+}
+export interface $201 {
+}
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildConfigurationRef;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildConfigurationRef;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = DeliverableAnalyzerReportLabelRequest;
+export interface $201 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = DeliverablesAnalysisRequest;
+export interface $202 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = GroupBuildPushRequest;
+export interface $202 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface $202 {
+}
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface $202 {
+}
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface $202 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface $202 {
+}
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export interface $200 {
+    length?: number; // int32
+    location?: string; // uri
+    language?: {
+        language?: string;
+        displayName?: string;
+        country?: string;
+        variant?: string;
+        script?: string;
+        unicodeLocaleAttributes?: string[];
+        unicodeLocaleKeys?: string[];
+        displayLanguage?: string;
+        displayScript?: string;
+        displayCountry?: string;
+        displayVariant?: string;
+        extensionKeys?: string[];
+        iso3Language?: string;
+        iso3Country?: string;
+    };
+    date?: string; // date-time
+    lastModified?: string; // date-time
+    headers?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    status?: number; // int32
+    metadata?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    entity?: {
+        [key: string]: any;
+    };
+    links?: {
+        type?: string;
+        params?: {
+            [name: string]: string;
+        };
+        rel?: string;
+        uriBuilder?: {
+            [key: string]: any;
+        };
+        title?: string;
+        uri?: string; // uri
+        rels?: string[];
+    }[];
+    entityTag?: {
+        value?: string;
+        weak?: boolean;
+    };
+    stringHeaders?: {
+        [name: string]: string[];
+        empty?: boolean;
+    };
+    mediaType?: {
+        type?: string;
+        subtype?: string;
+        parameters?: {
+            [name: string]: string;
+        };
+        wildcardType?: boolean;
+        wildcardSubtype?: boolean;
+    };
+    allowedMethods?: string[];
+    cookies?: {
+        [name: string]: {
+            name?: string;
+            value?: string;
+            version?: number; // int32
+            path?: string;
+            domain?: string;
+            comment?: string;
+            maxAge?: number; // int32
+            expiry?: string; // date-time
+            secure?: boolean;
+            httpOnly?: boolean;
+        };
+    };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        statusCode?: number; // int32
+        reasonPhrase?: string;
+    };
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $201 = BuildConfiguration;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface $202 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = string[];
+export interface $200 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildPushResult;
+export type $201 = BuildPushResult;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = Artifact;
+export type $201 = Artifact;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Quality = string;
+export type Reason = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    quality: Parameters.Quality;
+    reason: Parameters.Reason;
+}
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = BuildConfiguration;
+export type $201 = BuildConfiguration;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = Environment;
+export type $201 = Environment;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = GroupConfiguration;
+export type $201 = GroupConfiguration;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = Product;
+export type $201 = Product;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = ProductMilestone;
+export type $201 = ProductMilestone;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = ProductRelease;
+export type $201 = ProductRelease;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = ProductVersion;
+export type $201 = ProductVersion;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = Project;
+export type $201 = Project;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = CreateAndSyncSCMRequest;
+export type $201 = RepositoryCreationResponse;
+export type $202 = RepositoryCreationResponse;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = TargetRepository;
+export type $201 = TargetRepository;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Quality = string;
+export type Reason = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    quality: Parameters.Quality;
+    reason: Parameters.Reason;
+}
+export type $201 = ArtifactRevision;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildConfiguration;
+export type $201 = BuildConfigurationRevision;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = BuildConfigWithSCMRequest;
+export type $201 = BuildConfigCreationResponse;
+export type $202 = BuildConfigCreationResponse;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Callback = string;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    callback?: Parameters.Callback;
+}
+export interface $202 {
+}
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Callback = string;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    callback?: Parameters.Callback;
+}
+export interface $202 {
+}
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = EnvironmentDeprecationRequest;
+export type $200 = Environment;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Result = "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    result: Parameters.Result;
+}
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = string;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Md5 = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sha1 = string;
+export type Sha256 = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    sha256?: Parameters.Sha256;
+    md5?: Parameters.Md5;
+    sha1?: Parameters.Sha1;
+}
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = TargetRepositoryPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Attribute = string[];
+export type BuildConfigName = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+    attribute?: Parameters.Attribute;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = DeliverableAnalyzerReportPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildEnvironmentPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = GroupBuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = GroupConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProductPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProjectPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type SearchUrl = string;
+export type Sort = string;
+export type Url = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    url?: Parameters.Url;
+    "search-url"?: Parameters.SearchUrl;
+}
+export type $200 = SCMRepositoryPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Timestamp = number; // int64
+export interface QueryParameters {
+    pageSize?: Parameters.PageSize /* int32 */;
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    timestamp?: Parameters.Timestamp /* int64 */;
+}
+export type $200 = BuildRecordInsightsPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = DeliverableAnalyzerOperationPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = DeliverableAnalyzerOperationPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type BuildCategories = ("STANDARD" | "SERVICE" | "AUTO")[];
+export type Identifier = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Qualities = ("NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED")[];
+export type RepoType = "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    identifier?: Parameters.Identifier;
+    qualities?: Parameters.Qualities;
+    repoType?: Parameters.RepoType;
+    buildCategories?: Parameters.BuildCategories;
+}
+export type $200 = ArtifactInfoPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+}
+export type $200 = GroupBuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export type Timestamp = number; // int64
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    timestamp?: Parameters.Timestamp /* int64 */;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigWithLatestPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = AnalyzedArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type $200 = Banner;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProductVersionArtifactQualityStatisticsPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = number; // int32
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id /* int32 */;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = BuildConfigurationRevision;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = string;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type BuildType = string;
+export interface PathParameters {
+    buildType: Parameters.BuildType;
+}
+export type $200 = AlignmentParameters;
+export type BuildConfigName = string;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type BuildConfigName = string;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type BuildConfigName = string;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type BuildConfigName = string;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type BuildConfigName = string;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type BuildConfigName = string;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+    buildConfigName?: Parameters.BuildConfigName;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Latest = boolean;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Running = boolean;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+    latest?: Parameters.Latest;
+    running?: Parameters.Running;
+}
+export type $200 = ProductMilestoneCloseResultPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type $200 = RunningBuildCount;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type $200 = User;
+export type $500 = ErrorResponse;
+export type $200 = ComponentVersion;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = BuildsGraph;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = BuildsGraph;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export interface $200 {
+    length?: number; // int32
+    location?: string; // uri
+    language?: {
+        language?: string;
+        displayName?: string;
+        country?: string;
+        variant?: string;
+        script?: string;
+        unicodeLocaleAttributes?: string[];
+        unicodeLocaleKeys?: string[];
+        displayLanguage?: string;
+        displayScript?: string;
+        displayCountry?: string;
+        displayVariant?: string;
+        extensionKeys?: string[];
+        iso3Language?: string;
+        iso3Country?: string;
+    };
+    date?: string; // date-time
+    lastModified?: string; // date-time
+    headers?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    status?: number; // int32
+    metadata?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    entity?: {
+        [key: string]: any;
+    };
+    links?: {
+        type?: string;
+        params?: {
+            [name: string]: string;
+        };
+        rel?: string;
+        uriBuilder?: {
+            [key: string]: any;
+        };
+        title?: string;
+        uri?: string; // uri
+        rels?: string[];
+    }[];
+    entityTag?: {
+        value?: string;
+        weak?: boolean;
+    };
+    stringHeaders?: {
+        [name: string]: string[];
+        empty?: boolean;
+    };
+    mediaType?: {
+        type?: string;
+        subtype?: string;
+        parameters?: {
+            [name: string]: string;
+        };
+        wildcardType?: boolean;
+        wildcardSubtype?: boolean;
+    };
+    allowedMethods?: string[];
+    cookies?: {
+        [name: string]: {
+            name?: string;
+            value?: string;
+            version?: number; // int32
+            path?: string;
+            domain?: string;
+            comment?: string;
+            maxAge?: number; // int32
+            expiry?: string; // date-time
+            secure?: boolean;
+            httpOnly?: boolean;
+        };
+    };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        statusCode?: number; // int32
+        reasonPhrase?: string;
+    };
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = GroupConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = GroupConfigPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface $302 {
+}
+export interface $404 {
+}
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = DeliverableAnalyzerLabelEntryPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProductMilestonePage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = MilestoneInfoPage;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type $200 = Banner;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type $200 = PncStatus;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProductVersionPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = BuildPushResult;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProductReleasePage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = ProductVersionRepositoryTypeStatisticsPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Rev = number; // int32
+export interface PathParameters {
+    id: Parameters.Id;
+    rev: Parameters.Rev /* int32 */;
+}
+export type $200 = ArtifactRevision;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Rev = number; // int32
+export interface PathParameters {
+    id: Parameters.Id;
+    rev: Parameters.Rev /* int32 */;
+}
+export type $200 = BuildConfigurationRevision;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+}
+export type $200 = ArtifactRevisionPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type PageIndex = number; // int32
+export type PageSize = number; // int32
+export type Q = string;
+export type Sort = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    pageIndex?: Parameters.PageIndex /* int32 */;
+    pageSize?: Parameters.PageSize /* int32 */;
+    sort?: Parameters.Sort;
+    q?: Parameters.Q;
+}
+export type $200 = BuildConfigRevisionPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export interface $200 {
+    length?: number; // int32
+    location?: string; // uri
+    language?: {
+        language?: string;
+        displayName?: string;
+        country?: string;
+        variant?: string;
+        script?: string;
+        unicodeLocaleAttributes?: string[];
+        unicodeLocaleKeys?: string[];
+        displayLanguage?: string;
+        displayScript?: string;
+        displayCountry?: string;
+        displayVariant?: string;
+        extensionKeys?: string[];
+        iso3Language?: string;
+        iso3Country?: string;
+    };
+    date?: string; // date-time
+    lastModified?: string; // date-time
+    headers?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    status?: number; // int32
+    metadata?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    entity?: {
+        [key: string]: any;
+    };
+    links?: {
+        type?: string;
+        params?: {
+            [name: string]: string;
+        };
+        rel?: string;
+        uriBuilder?: {
+            [key: string]: any;
+        };
+        title?: string;
+        uri?: string; // uri
+        rels?: string[];
+    }[];
+    entityTag?: {
+        value?: string;
+        weak?: boolean;
+    };
+    stringHeaders?: {
+        [name: string]: string[];
+        empty?: boolean;
+    };
+    mediaType?: {
+        type?: string;
+        subtype?: string;
+        parameters?: {
+            [name: string]: string;
+        };
+        wildcardType?: boolean;
+        wildcardSubtype?: boolean;
+    };
+    allowedMethods?: string[];
+    cookies?: {
+        [name: string]: {
+            name?: string;
+            value?: string;
+            version?: number; // int32
+            path?: string;
+            domain?: string;
+            comment?: string;
+            maxAge?: number; // int32
+            expiry?: string; // date-time
+            secure?: boolean;
+            httpOnly?: boolean;
+        };
+    };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        statusCode?: number; // int32
+        reasonPhrase?: string;
+    };
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export interface $200 {
+    length?: number; // int32
+    location?: string; // uri
+    language?: {
+        language?: string;
+        displayName?: string;
+        country?: string;
+        variant?: string;
+        script?: string;
+        unicodeLocaleAttributes?: string[];
+        unicodeLocaleKeys?: string[];
+        displayLanguage?: string;
+        displayScript?: string;
+        displayCountry?: string;
+        displayVariant?: string;
+        extensionKeys?: string[];
+        iso3Language?: string;
+        iso3Country?: string;
+    };
+    date?: string; // date-time
+    lastModified?: string; // date-time
+    headers?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    status?: number; // int32
+    metadata?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    entity?: {
+        [key: string]: any;
+    };
+    links?: {
+        type?: string;
+        params?: {
+            [name: string]: string;
+        };
+        rel?: string;
+        uriBuilder?: {
+            [key: string]: any;
+        };
+        title?: string;
+        uri?: string; // uri
+        rels?: string[];
+    }[];
+    entityTag?: {
+        value?: string;
+        weak?: boolean;
+    };
+    stringHeaders?: {
+        [name: string]: string[];
+        empty?: boolean;
+    };
+    mediaType?: {
+        type?: string;
+        subtype?: string;
+        parameters?: {
+            [name: string]: string;
+        };
+        wildcardType?: boolean;
+        wildcardSubtype?: boolean;
+    };
+    allowedMethods?: string[];
+    cookies?: {
+        [name: string]: {
+            name?: string;
+            value?: string;
+            version?: number; // int32
+            path?: string;
+            domain?: string;
+            comment?: string;
+            maxAge?: number; // int32
+            expiry?: string; // date-time
+            secure?: boolean;
+            httpOnly?: boolean;
+        };
+    };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        statusCode?: number; // int32
+        reasonPhrase?: string;
+    };
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export interface $200 {
+    length?: number; // int32
+    location?: string; // uri
+    language?: {
+        language?: string;
+        displayName?: string;
+        country?: string;
+        variant?: string;
+        script?: string;
+        unicodeLocaleAttributes?: string[];
+        unicodeLocaleKeys?: string[];
+        displayLanguage?: string;
+        displayScript?: string;
+        displayCountry?: string;
+        displayVariant?: string;
+        extensionKeys?: string[];
+        iso3Language?: string;
+        iso3Country?: string;
+    };
+    date?: string; // date-time
+    lastModified?: string; // date-time
+    headers?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    status?: number; // int32
+    metadata?: {
+        [name: string]: {
+            [key: string]: any;
+        }[];
+        empty?: boolean;
+    };
+    entity?: {
+        [key: string]: any;
+    };
+    links?: {
+        type?: string;
+        params?: {
+            [name: string]: string;
+        };
+        rel?: string;
+        uriBuilder?: {
+            [key: string]: any;
+        };
+        title?: string;
+        uri?: string; // uri
+        rels?: string[];
+    }[];
+    entityTag?: {
+        value?: string;
+        weak?: boolean;
+    };
+    stringHeaders?: {
+        [name: string]: string[];
+        empty?: boolean;
+    };
+    mediaType?: {
+        type?: string;
+        subtype?: string;
+        parameters?: {
+            [name: string]: string;
+        };
+        wildcardType?: boolean;
+        wildcardSubtype?: boolean;
+    };
+    allowedMethods?: string[];
+    cookies?: {
+        [name: string]: {
+            name?: string;
+            value?: string;
+            version?: number; // int32
+            path?: string;
+            domain?: string;
+            comment?: string;
+            maxAge?: number; // int32
+            expiry?: string; // date-time
+            secure?: boolean;
+            httpOnly?: boolean;
+        };
+    };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        statusCode?: number; // int32
+        reasonPhrase?: string;
+    };
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = Artifact;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = BuildConfiguration;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = ProductVersion;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = Project;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = SCMRepository;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = TargetRepository;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = Build;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = DeliverableAnalyzerReport;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = Environment;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = GroupBuild;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = GroupConfiguration;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = Product;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = ProductMilestone;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = ProductRelease;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = DeliverableAnalyzerOperation;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Purl = string;
+export interface PathParameters {
+    purl: Parameters.Purl;
+}
+export type $200 = Artifact;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = SSHCredentials;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = ProductMilestoneStatistics;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type $200 = ProductVersionStatistics;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type $200 = ("UNRELEASED" | "EARLYACCESS" | "SUPPORTED" | "EXTENDED_SUPPORT" | "EOL")[];
+export type $500 = ErrorResponse;
+export type $200 = Parameter[];
+export type $200 = boolean;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type $200 = boolean;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildConfiguration;
+export type $200 = BuildConfiguration;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = GroupConfiguration;
+export type $200 = GroupConfiguration;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = Product;
+export type $200 = Product;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = ProductMilestone;
+export type $200 = ProductMilestone;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = ProductRelease;
+export type $200 = ProductRelease;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = ProductVersion;
+export type $200 = ProductVersion;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = Project;
+export type $200 = Project;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = SCMRepository;
+export type $200 = SCMRepository;
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildPushParameters;
+export type $202 = BuildPushResult;
+export type $400 = ErrorResponse;
+export type $403 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Key = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    key: Parameters.Key;
+}
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type ConfigId = string;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+    configId: Parameters.ConfigId;
+}
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type DepId = string;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+    depId: Parameters.DepId;
+}
+export interface $204 {
+}
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = DeliverableAnalyzerReportLabelRequest;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export type Rev = number; // int32
+export interface PathParameters {
+    id: Parameters.Id;
+    rev: Parameters.Rev /* int32 */;
+}
+export type $200 = BuildConfiguration;
+export interface $404 {
+}
+export type $500 = ErrorResponse;
+export type RequestBody = string;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = string[];
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = string[];
+export type $200 = ArtifactPage;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = string;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = PncStatus;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = ScratchDeliverablesAnalysisRequest;
+export type $202 = DeliverableAnalyzerOperation;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
+export type BuildDependencies = boolean;
+export type Id = string;
+export type KeepPodOnFailure = boolean;
+export type RebuildMode = "IMPLICIT_DEPENDENCY_CHECK" | "EXPLICIT_DEPENDENCY_CHECK" | "FORCE";
+export type TemporaryBuild = boolean;
+export type TimestampAlignment = boolean;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    temporaryBuild?: Parameters.TemporaryBuild;
+    rebuildMode?: Parameters.RebuildMode;
+    buildDependencies?: Parameters.BuildDependencies;
+    keepPodOnFailure?: Parameters.KeepPodOnFailure;
+    timestampAlignment?: Parameters.TimestampAlignment;
+    alignmentPreference?: Parameters.AlignmentPreference;
+}
+export type $202 = Build;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
+export type Id = string;
+export type RebuildMode = "IMPLICIT_DEPENDENCY_CHECK" | "EXPLICIT_DEPENDENCY_CHECK" | "FORCE";
+export type TemporaryBuild = boolean;
+export type TimestampAlignment = boolean;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export interface QueryParameters {
+    temporaryBuild?: Parameters.TemporaryBuild;
+    rebuildMode?: Parameters.RebuildMode;
+    timestampAlignment?: Parameters.TimestampAlignment;
+    alignmentPreference?: Parameters.AlignmentPreference;
+}
+export type RequestBody = GroupBuildRequest;
+export type $202 = GroupBuild;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
+export type BuildDependencies = boolean;
+export type Id = string;
+export type KeepPodOnFailure = boolean;
+export type RebuildMode = "IMPLICIT_DEPENDENCY_CHECK" | "EXPLICIT_DEPENDENCY_CHECK" | "FORCE";
+export type Rev = number; // int32
+export type TemporaryBuild = boolean;
+export type TimestampAlignment = boolean;
+export interface PathParameters {
+    id: Parameters.Id;
+    rev: Parameters.Rev /* int32 */;
+}
+export interface QueryParameters {
+    temporaryBuild?: Parameters.TemporaryBuild;
+    rebuildMode?: Parameters.RebuildMode;
+    buildDependencies?: Parameters.BuildDependencies;
+    keepPodOnFailure?: Parameters.KeepPodOnFailure;
+    timestampAlignment?: Parameters.TimestampAlignment;
+    alignmentPreference?: Parameters.AlignmentPreference;
+}
+export type $202 = Build;
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = Artifact;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = BuildConfiguration;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = Build;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = GroupConfiguration;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = Product;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = ProductMilestone;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = ProductRelease;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = ProductVersion;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = Project;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = SCMRepository;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type Id = string;
+export interface PathParameters {
+    id: Parameters.Id;
+}
+export type RequestBody = DeliverableAnalyzerOperation;
+export interface $204 {
+}
+export type $400 = ErrorResponse;
+export type $409 = ErrorResponse;
+export type $500 = ErrorResponse;
+export type RequestBody = VersionValidationRequest;
+export type $200 = ValidationResponse;
+export type $400 = ErrorResponse;
+export type $500 = ErrorResponse;
