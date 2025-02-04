@@ -1,5 +1,12 @@
 #!/bin/bash
 
+function check_exit() {
+      if [ $1 -ne 0 ]; then
+        echo $2
+        exit 1
+      fi
+}
+
 echo "This is release script for pnc-api-types-ts repo.
 
 usage: './release.sh pnc-revision' where pnc revision is tag or commit hash
@@ -27,8 +34,10 @@ mkdir .tmp
 pushd .tmp
 
 wget https://repo1.maven.org/maven2/org/jboss/pnc/project-manipulator/project-manipulator-cli/1.1.0/project-manipulator-cli-1.1.0.jar
+check_exit $? "Cannot download project manipulator, exiting"
 
 git clone https://github.com/project-ncl/pnc.git
+check_exit $? "Cannot clone pnc, exiting"
 
 pushd pnc 
 
@@ -49,7 +58,8 @@ fi
 
 pushd ${REST_API_DIR}
 
-mvn clean install -DskipTests
+mvn clean install -DskipTests -Dlicense.skip
+check_exit $? "Error during project build, exiting"
 
 # getting project.version from pnc project (example: 2.4.0-SNAPSHOT)
 MVN_PNC_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
@@ -75,11 +85,14 @@ else
 
 #using project-manipulator to update package.json version to new generated one
 java -jar .tmp/project-manipulator-cli-1.1.0.jar -f package.json -DversionOverride=${NPM_VERSION}
+check_exit $? "Cannot update npm version using project manipulator, exiting"
 
 #installing dependencies required for generation and updating version in package-lock
 npm install
+check_exit $? "NPM install failed, exiting"
 
 npm run generate:dts
+check_exit $? "Cannot generate dts, exiting"
 
 rm -rf .tmp
 
