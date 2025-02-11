@@ -2,15 +2,14 @@
   "name" : "@project-ncl/pnc-api-types-ts",
   "version" : "3.1.3-SNAPSHOT-pnc-7abd9ec33",
   "devDependencies" : {
-    "dtsgenerator" : "^3.19.2",
-    "@dtsgenerator/replace-namespace" : "^1.7.0",
-    "replace" : "^1.2.2"
+    "dtsgenerator" : "^2.7.0",
+    "replace" : "^1.2.1"
   },
   "types" : "index.d.ts",
   "scripts" : {
     "clean" : "rm -rf .tmp dist",
     "nuke" : "npm run clean && rm -rf node_modules",
-    "generate:dts" : "dtsgen -c dtsgen.json -o ./index.d.ts ./.tmp/pnc-openapi.json && replace 'declare' 'export' index.d.ts"
+    "generate:dts" : "dtsgen -n \"\" -o ./index.d.ts ./.tmp/pnc-openapi.json && replace 'declare' 'export' index.d.ts"
   },
   "engines" : {
     "node" : "^22.13.0",
