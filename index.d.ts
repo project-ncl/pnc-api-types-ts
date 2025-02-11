@@ -1162,6 +1162,11 @@ export interface $200 {
     entity?: {
         [key: string]: any;
     };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        reasonPhrase?: string;
+        statusCode?: number; // int32
+    };
     mediaType?: {
         type?: string;
         subtype?: string;
@@ -1193,11 +1198,6 @@ export interface $200 {
         rel?: string;
         rels?: string[];
     }[];
-    statusInfo?: {
-        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
-        reasonPhrase?: string;
-        statusCode?: number; // int32
-    };
     headers?: {
         [name: string]: {
             [key: string]: any;
@@ -2135,6 +2135,11 @@ export interface $200 {
     entity?: {
         [key: string]: any;
     };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        reasonPhrase?: string;
+        statusCode?: number; // int32
+    };
     mediaType?: {
         type?: string;
         subtype?: string;
@@ -2166,11 +2171,6 @@ export interface $200 {
         rel?: string;
         rels?: string[];
     }[];
-    statusInfo?: {
-        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
-        reasonPhrase?: string;
-        statusCode?: number; // int32
-    };
     headers?: {
         [name: string]: {
             [key: string]: any;
@@ -2433,6 +2433,11 @@ export interface $200 {
     entity?: {
         [key: string]: any;
     };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        reasonPhrase?: string;
+        statusCode?: number; // int32
+    };
     mediaType?: {
         type?: string;
         subtype?: string;
@@ -2464,11 +2469,6 @@ export interface $200 {
         rel?: string;
         rels?: string[];
     }[];
-    statusInfo?: {
-        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
-        reasonPhrase?: string;
-        statusCode?: number; // int32
-    };
     headers?: {
         [name: string]: {
             [key: string]: any;
@@ -2523,6 +2523,11 @@ export interface $200 {
     entity?: {
         [key: string]: any;
     };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        reasonPhrase?: string;
+        statusCode?: number; // int32
+    };
     mediaType?: {
         type?: string;
         subtype?: string;
@@ -2554,11 +2559,6 @@ export interface $200 {
         rel?: string;
         rels?: string[];
     }[];
-    statusInfo?: {
-        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
-        reasonPhrase?: string;
-        statusCode?: number; // int32
-    };
     headers?: {
         [name: string]: {
             [key: string]: any;
@@ -2613,6 +2613,11 @@ export interface $200 {
     entity?: {
         [key: string]: any;
     };
+    statusInfo?: {
+        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
+        reasonPhrase?: string;
+        statusCode?: number; // int32
+    };
     mediaType?: {
         type?: string;
         subtype?: string;
@@ -2644,11 +2649,6 @@ export interface $200 {
         rel?: string;
         rels?: string[];
     }[];
-    statusInfo?: {
-        family?: "INFORMATIONAL" | "SUCCESSFUL" | "REDIRECTION" | "CLIENT_ERROR" | "SERVER_ERROR" | "OTHER";
-        reasonPhrase?: string;
-        statusCode?: number; // int32
-    };
     headers?: {
         [name: string]: {
             [key: string]: any;
