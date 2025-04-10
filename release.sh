@@ -66,7 +66,8 @@ MVN_PNC_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}'
 
 popd && popd
 
-cp pnc/rest-api/target/pnc-openapi.json .
+cp pnc/rest-api/pnc-openapi.json .
+check_exit $? "Cannot find or copy pnc-openapi.json, exiting"
 
 #putting together version for npm package (example: 2.3.0-pnc-2.3.0 or 2.3.0-SNAPSHOT-pnc-aNdosndf)
 NPM_VERSION=(${MVN_PNC_VERSION}-pnc-${PNC_VER})
