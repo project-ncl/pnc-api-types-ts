@@ -262,30 +262,47 @@ export interface BuildPage {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface BuildPushCompleted {
+    brewBuildId?: number; // int32
+    brewBuildUrl?: string;
+    callback?: Request;
+    operationId?: string;
+}
+export interface BuildPushOperation {
+    build?: BuildRef;
+    endTime?: string; // date-time
+    id: string;
+    parameters?: {
+        [name: string]: string;
+    };
+    progressStatus?: "NEW" | "PENDING" | "IN_PROGRESS" | "FINISHED";
+    result?: "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
+    startTime?: string; // date-time
+    submitTime?: string; // date-time
+    user?: User;
+}
+export interface BuildPushOperationPage {
+    content?: BuildPushOperation[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface BuildPushParameters {
     reimport?: boolean;
     tagPrefix: string;
 }
-export interface BuildPushResult {
+export interface BuildPushReport {
     brewBuildId?: number; // int32
     brewBuildUrl?: string;
-    buildId: string;
-    id: string;
-    logContext?: string;
-    message?: string;
-    productMilestoneCloseResult?: ProductMilestoneCloseResultRef;
-    status: "ACCEPTED" | "SUCCESS" | "REJECTED" | "FAILED" | "SYSTEM_ERROR" | "CANCELED";
-    userInitiator?: string;
-}
-export interface BuildPushResultRef {
-    brewBuildId?: number; // int32
-    brewBuildUrl?: string;
-    buildId: string;
-    id: string;
-    logContext?: string;
-    message?: string;
-    status: "ACCEPTED" | "SUCCESS" | "REJECTED" | "FAILED" | "SYSTEM_ERROR" | "CANCELED";
-    userInitiator?: string;
+    build?: BuildRef;
+    endTime?: string; // date-time
+    id?: string;
+    result?: "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
+    startTime?: string; // date-time
+    submitTime?: string; // date-time
+    tagPrefix?: string;
+    user?: User;
 }
 export interface BuildRecordInsights {
     autoalign?: boolean;
@@ -431,6 +448,11 @@ export interface EdgeBuild {
     source?: string;
     target?: string;
 }
+export interface EdgeProductMilestone {
+    cost?: number; // int32
+    source?: string;
+    target?: string;
+}
 export interface Environment {
     attributes?: {
         [name: string]: string;
@@ -457,6 +479,12 @@ export interface GraphBuild {
     edges?: EdgeBuild[];
     vertices?: {
         [name: string]: VertexBuild;
+    };
+}
+export interface GraphProductMilestone {
+    edges?: EdgeProductMilestone[];
+    vertices?: {
+        [name: string]: VertexProductMilestone;
     };
 }
 export interface GroupBuild {
@@ -510,6 +538,10 @@ export interface GroupConfigurationRef {
     id: string;
     name: string;
 }
+export interface Header {
+    name: string;
+    value: string;
+}
 export interface LicenseInfo {
     comments?: string;
     distribution?: string;
@@ -517,6 +549,12 @@ export interface LicenseInfo {
     source?: "UNKNOWN" | "POM" | "POM_XML" | "BUNDLE_LICENSE" | "TEXT";
     spdxLicenseId?: string;
     url?: string;
+}
+export interface MapOfMaps {
+    empty?: boolean;
+}
+export interface MilestoneCloseRequest {
+    skipBrewPush?: boolean;
 }
 export interface MilestoneInfo {
     built?: boolean;
@@ -594,6 +632,13 @@ export interface PageBuildConfigurationWithLatestBuild {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface PageBuildPushOperation {
+    content?: BuildPushOperation[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface PageBuildRecordInsights {
     content?: BuildRecordInsights[];
     pageIndex?: number; // int32
@@ -666,13 +711,6 @@ export interface PageProductMilestone {
 }
 export interface PageProductMilestoneArtifactQualityStatistics {
     content?: ProductMilestoneArtifactQualityStatistics[];
-    pageIndex?: number; // int32
-    pageSize?: number; // int32
-    totalHits?: number; // int32
-    totalPages?: number; // int32
-}
-export interface PageProductMilestoneCloseResult {
-    content?: ProductMilestoneCloseResult[];
     pageIndex?: number; // int32
     pageSize?: number; // int32
     totalHits?: number; // int32
@@ -803,27 +841,6 @@ export interface ProductMilestoneArtifactQualityStatistics {
         [name: string]: number; // int64
     };
     productMilestone?: ProductMilestoneRef;
-}
-export interface ProductMilestoneCloseResult {
-    buildPushResults?: BuildPushResultRef[];
-    endDate?: string; // date-time
-    id: string;
-    milestone?: ProductMilestoneRef;
-    startingDate: string; // date-time
-    status: "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SYSTEM_ERROR";
-}
-export interface ProductMilestoneCloseResultPage {
-    content?: ProductMilestoneCloseResult[];
-    pageIndex?: number; // int32
-    pageSize?: number; // int32
-    totalHits?: number; // int32
-    totalPages?: number; // int32
-}
-export interface ProductMilestoneCloseResultRef {
-    endDate?: string; // date-time
-    id: string;
-    startingDate: string; // date-time
-    status: "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SYSTEM_ERROR";
 }
 export interface ProductMilestoneDeliveredArtifactsStatistics {
     noBuild?: number; // int64
@@ -1006,6 +1023,13 @@ export interface RepositoryCreationResponse {
     repository?: SCMRepository;
     taskId?: number; // int64
 }
+export interface Request {
+    attachment?: {
+    };
+    headers?: Header[];
+    method: "GET" | "POST" | "PUT" | "DELETE" | "HEAD" | "PATCH" | "OPTIONS";
+    uri?: string; // uri
+}
 export type RequestBody = TargetRepository;
 export namespace Responses {
     export type $200 = ComponentVersion;
@@ -1076,6 +1100,11 @@ export interface VersionValidationRequest {
 }
 export interface VertexBuild {
     data?: Build;
+    dataType?: string;
+    name?: string;
+}
+export interface VertexProductMilestone {
+    data?: ProductMilestone;
     dataType?: string;
     name?: string;
 }
