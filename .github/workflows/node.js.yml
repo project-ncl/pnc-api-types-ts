@@ -47,7 +47,7 @@ jobs:
           git config --global user.name "workflowsTester"
       - name: Run release script
         # 2.2.2 ==> does not exist on pnc-api-types-ts, but does on the pnc repo
-        run: ./release.sh 2.2.2
+        run: ./release.sh 6715052687eae63e9b5a9c5538c24814d1bb9660
         shell: bash
 
   check-package-lock:
