@@ -42,6 +42,7 @@ check_exit $? "Cannot clone pnc, exiting"
 pushd pnc 
 
 git reset --hard ${PNC_REV}
+check_exit $? "Tag or revision does not exist, exiting"
 
 PNC_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
