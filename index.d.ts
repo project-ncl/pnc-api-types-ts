@@ -298,6 +298,7 @@ export interface BuildPushReport {
     build?: BuildRef;
     endTime?: string; // date-time
     id?: string;
+    progressStatus?: "NEW" | "PENDING" | "IN_PROGRESS" | "FINISHED";
     result?: "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
     startTime?: string; // date-time
     submitTime?: string; // date-time
@@ -773,12 +774,16 @@ export namespace Parameters {
     export type Callback = string;
     export type ConfigId = string;
     export type DepId = string;
+    export type DepthLimit = number; // int32
     export type Id = string;
     export type Identifier = string;
     export type KeepPodOnFailure = boolean;
     export type Key = string;
     export type Latest = boolean;
     export type Md5 = string;
+    export type Milestone1 = string;
+    export type Milestone2 = string;
+    export type MilestoneIds = string[];
     export type PageIndex = number; // int32
     export type PageSize = number; // int32
     export type Purl = string;
