@@ -151,7 +151,7 @@ export interface BuildConfigWithSCMRequest {
 export interface BuildConfiguration {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
+    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
     creationTime?: string; // date-time
     creationUser?: User;
     defaultAlignmentParams?: string;
@@ -178,7 +178,7 @@ export interface BuildConfiguration {
 export interface BuildConfigurationRef {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
+    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
     creationTime?: string; // date-time
     defaultAlignmentParams?: string;
     description?: string;
@@ -190,7 +190,7 @@ export interface BuildConfigurationRef {
 export interface BuildConfigurationRevision {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT";
+    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
     creationTime?: string; // date-time
     creationUser?: User;
     defaultAlignmentParams?: string;
@@ -210,7 +210,7 @@ export interface BuildConfigurationRevision {
 export interface BuildConfigurationRevisionRef {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT";
+    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
     creationTime?: string; // date-time
     defaultAlignmentParams?: string;
     id: string;
@@ -222,7 +222,7 @@ export interface BuildConfigurationRevisionRef {
 export interface BuildConfigurationWithLatestBuild {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType: "MVN" | "NPM" | "GRADLE" | "SBT";
+    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
     creationTime?: string; // date-time
     creationUser?: User;
     defaultAlignmentParams?: string;
