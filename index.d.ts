@@ -27,27 +27,28 @@ export interface AnalyzedDistribution {
 }
 export interface Artifact {
     artifactQuality: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
+    attachedBuild?: Build;
     build?: Build;
     buildCategory: "STANDARD" | "SERVICE" | "AUTO";
     creationTime?: string; // date-time
     creationUser?: User;
     deployPath?: string;
     deployUrl?: string;
-    filename?: string;
+    filename: string;
     id: string;
     identifier: string;
     importDate?: string; // date-time
-    md5?: string;
+    md5: string;
     modificationTime?: string; // date-time
     modificationUser?: User;
     originUrl?: string;
     publicUrl?: string;
     purl?: string;
     qualityLevelReason?: string;
-    sha1?: string;
-    sha256?: string;
+    sha1: string;
+    sha256: string;
     size?: number; // int64
-    targetRepository?: TargetRepository;
+    targetRepository: TargetRepository;
 }
 export interface ArtifactInfo {
     artifactQuality?: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
@@ -248,6 +249,18 @@ export interface BuildConfigurationWithLatestBuild {
     scmRepository?: SCMRepository;
     scmRevision?: string;
 }
+export interface BuildDefinition {
+    buildType?: string;
+    externalParameters?: {
+        [name: string]: {
+        };
+    };
+    internalParameters?: {
+        [name: string]: {
+        };
+    };
+    resolvedDependencies?: ResourceDescriptor[];
+}
 export interface BuildEnvironmentPage {
     content?: Environment[];
     pageIndex?: number; // int32
@@ -272,6 +285,7 @@ export interface BuildPushOperation {
     build?: BuildRef;
     endTime?: string; // date-time
     id: string;
+    outcome?: OperationOutcome;
     parameters?: {
         [name: string]: string;
     };
@@ -308,7 +322,7 @@ export interface BuildPushReport {
 export interface BuildRecordInsights {
     autoalign?: boolean;
     brewpullactive?: boolean;
-    buildConfigSetRecordId?: number; // int32
+    buildConfigSetRecordId?: number; // int64
     buildConfigurationId?: number; // int32
     buildConfigurationName?: string;
     buildConfigurationRev?: number; // int32
@@ -362,6 +376,13 @@ export interface BuildRef {
     submitTime?: string; // date-time
     temporaryBuild?: boolean;
 }
+export interface Builder {
+    builderDependencies?: ResourceDescriptor[];
+    id?: string;
+    version?: {
+        [name: string]: string;
+    };
+}
 export interface BuildsGraph {
     edges?: EdgeBuild[];
     vertices?: {
@@ -396,6 +417,7 @@ export interface DeliverableAnalyzerLabelEntryPage {
 export interface DeliverableAnalyzerOperation {
     endTime?: string; // date-time
     id: string;
+    outcome?: OperationOutcome;
     parameters?: {
         [name: string]: string;
     };
@@ -555,6 +577,11 @@ export interface LicenseInfo {
 export interface MapOfMaps {
     empty?: boolean;
 }
+export interface Metadata {
+    finishedOn?: string; // date-time
+    invocationId?: string;
+    startedOn?: string; // date-time
+}
 export interface MilestoneCloseRequest {
     skipBrewPush?: boolean;
 }
@@ -577,6 +604,11 @@ export interface MilestoneInfoPage {
     pageSize?: number; // int32
     totalHits?: number; // int32
     totalPages?: number; // int32
+}
+export interface OperationOutcome {
+    proposal?: string;
+    reason?: string;
+    result: "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
 }
 export interface PageAnalyzedArtifact {
     content?: AnalyzedArtifact[];
@@ -793,7 +825,6 @@ export namespace Parameters {
     export type Reason = string;
     export type RebuildMode = "IMPLICIT_DEPENDENCY_CHECK" | "EXPLICIT_DEPENDENCY_CHECK" | "FORCE";
     export type RepoType = "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
-    export type Result = "SUCCESSFUL" | "FAILED" | "REJECTED" | "CANCELLED" | "TIMEOUT" | "SYSTEM_ERROR";
     export type Rev = number; // int32
     export type Running = boolean;
     export type SearchUrl = string;
@@ -819,6 +850,10 @@ export interface PncStatus {
     banner?: string;
     eta?: string; // date-time
     isMaintenanceMode: boolean;
+}
+export interface Predicate {
+    buildDefinition?: BuildDefinition;
+    runDetails?: RunDetails;
 }
 export interface Product {
     abbreviation: string; // [a-zA-Z0-9-]+
@@ -1016,6 +1051,12 @@ export interface ProjectRef {
     projectUrl?: string;
     technicalLeader?: string;
 }
+export interface Provenance {
+    _type?: string;
+    predicate?: Predicate;
+    predicateType?: string;
+    subject?: ResourceDescriptor[];
+}
 export interface QueryParameters {
     pageIndex?: Parameters.PageIndex; // int32
     pageSize?: Parameters.PageSize; // int32
@@ -1037,6 +1078,20 @@ export interface Request {
     uri?: string; // uri
 }
 export type RequestBody = TargetRepository;
+export interface ResourceDescriptor {
+    annotations?: {
+        [name: string]: {
+        };
+    };
+    content?: string;
+    digest?: {
+        [name: string]: string;
+    };
+    downloadLocation?: string;
+    mediaType?: string;
+    name?: string;
+    uri?: string;
+}
 export namespace Responses {
     export type $200 = ComponentVersion;
     export type $201 = TargetRepository;
@@ -1051,6 +1106,11 @@ export namespace Responses {
     }
     export type $409 = ErrorResponse;
     export type $500 = ErrorResponse;
+}
+export interface RunDetails {
+    builder?: Builder;
+    byproducts?: ResourceDescriptor[];
+    metadata?: Metadata;
 }
 export interface RunningBuildCount {
     enqueued?: number; // int32
