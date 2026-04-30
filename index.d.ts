@@ -27,9 +27,8 @@ export interface AnalyzedDistribution {
 }
 export interface Artifact {
     artifactQuality: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
-    attachedBuild?: Build;
     build?: Build;
-    buildCategory: "STANDARD" | "SERVICE" | "AUTO";
+    buildCategory: "STANDARD" | "LEGACY_REDHAT" | "SERVICE";
     creationTime?: string; // date-time
     creationUser?: User;
     deployPath?: string;
@@ -52,10 +51,10 @@ export interface Artifact {
 }
 export interface ArtifactInfo {
     artifactQuality?: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
-    buildCategory?: "STANDARD" | "SERVICE" | "AUTO";
+    buildCategory?: "STANDARD" | "LEGACY_REDHAT" | "SERVICE";
     id?: string;
     identifier?: string;
-    repositoryType?: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
+    repositoryType?: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE" | "RPM";
 }
 export interface ArtifactInfoPage {
     content?: ArtifactInfo[];
@@ -73,7 +72,7 @@ export interface ArtifactPage {
 }
 export interface ArtifactRevision {
     artifactQuality?: "NEW" | "VERIFIED" | "TESTED" | "DEPRECATED" | "BLACKLISTED" | "DELETED" | "TEMPORARY" | "IMPORTED";
-    buildCategory?: "STANDARD" | "SERVICE" | "AUTO";
+    buildCategory?: "STANDARD" | "LEGACY_REDHAT" | "SERVICE";
     id: string;
     modificationTime?: string; // date-time
     modificationUser?: User;
@@ -82,6 +81,23 @@ export interface ArtifactRevision {
 }
 export interface ArtifactRevisionPage {
     content?: ArtifactRevision[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
+export interface Attachment {
+    build?: BuildRef;
+    creationTime?: string; // date-time
+    description?: string;
+    id: string;
+    name: string;
+    sha256: string;
+    type: "LOG" | "SBOM" | "PROVENANCE" | "VULNERABILITY_SCAN" | "OTHER";
+    url: string;
+}
+export interface AttachmentPage {
+    content?: Attachment[];
     pageIndex?: number; // int32
     pageSize?: number; // int32
     totalHits?: number; // int32
@@ -152,7 +168,7 @@ export interface BuildConfigWithSCMRequest {
 export interface BuildConfiguration {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
+    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM" | "RPM";
     creationTime?: string; // date-time
     creationUser?: User;
     defaultAlignmentParams?: string;
@@ -179,7 +195,7 @@ export interface BuildConfiguration {
 export interface BuildConfigurationRef {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
+    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM" | "RPM";
     creationTime?: string; // date-time
     defaultAlignmentParams?: string;
     description?: string;
@@ -191,7 +207,7 @@ export interface BuildConfigurationRef {
 export interface BuildConfigurationRevision {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
+    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM" | "RPM";
     creationTime?: string; // date-time
     creationUser?: User;
     defaultAlignmentParams?: string;
@@ -211,7 +227,7 @@ export interface BuildConfigurationRevision {
 export interface BuildConfigurationRevisionRef {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
+    buildType?: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM" | "RPM";
     creationTime?: string; // date-time
     defaultAlignmentParams?: string;
     id: string;
@@ -223,7 +239,7 @@ export interface BuildConfigurationRevisionRef {
 export interface BuildConfigurationWithLatestBuild {
     brewPullActive?: boolean;
     buildScript?: string;
-    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM";
+    buildType: "MVN" | "NPM" | "GRADLE" | "SBT" | "MVN_RPM" | "RPM";
     creationTime?: string; // date-time
     creationUser?: User;
     defaultAlignmentParams?: string;
@@ -638,6 +654,13 @@ export interface PageArtifactRevision {
     totalHits?: number; // int32
     totalPages?: number; // int32
 }
+export interface PageAttachment {
+    content?: Attachment[];
+    pageIndex?: number; // int32
+    pageSize?: number; // int32
+    totalHits?: number; // int32
+    totalPages?: number; // int32
+}
 export interface PageBuild {
     content?: Build[];
     pageIndex?: number; // int32
@@ -795,11 +818,12 @@ export interface PageTargetRepository {
 export interface Parameter {
     description?: string;
     name?: string;
+    values?: string[];
 }
 export namespace Parameters {
     export type AlignmentPreference = "PREFER_PERSISTENT" | "PREFER_TEMPORARY";
     export type Attribute = string[];
-    export type BuildCategories = ("STANDARD" | "SERVICE" | "AUTO")[];
+    export type BuildCategories = ("STANDARD" | "LEGACY_REDHAT" | "SERVICE")[];
     export type BuildConfigName = string;
     export type BuildDependencies = boolean;
     export type BuildType = string;
@@ -824,7 +848,7 @@ export namespace Parameters {
     export type Quality = string;
     export type Reason = string;
     export type RebuildMode = "IMPLICIT_DEPENDENCY_CHECK" | "EXPLICIT_DEPENDENCY_CHECK" | "FORCE";
-    export type RepoType = "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
+    export type RepoType = "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE" | "RPM";
     export type Rev = number; // int32
     export type Running = boolean;
     export type SearchUrl = string;
@@ -1141,7 +1165,7 @@ export interface TargetRepository {
     id: string;
     identifier: string;
     repositoryPath: string;
-    repositoryType: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE";
+    repositoryType: "MAVEN" | "NPM" | "COCOA_POD" | "GENERIC_PROXY" | "DISTRIBUTION_ARCHIVE" | "RPM";
     temporaryRepo: boolean;
 }
 export interface TargetRepositoryPage {
