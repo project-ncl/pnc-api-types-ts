@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "00 03 * * *"
+    - cron: "00 11 * * *"
+
+jobs:
+  release-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Use up JDK 11
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          java-version: "11"
+          distribution: "adopt"
+
+      - name: Print versions
+        run: |
+          git --version
+          mvn -v
+
+      - uses: project-ncl/shared-github-actions/.github/actions/npm-build@429a1085131890ddf95456ac2a7a8b0866dd78ad # main
+        with:
+          node_version: "22.x"
+          build_command: "npm instal"
+
+      - name: Set git user information
+        run: |
+          git config --global user.email "workflowsTester@test.com"
+          git config --global user.name "workflowsTester"
+
+      - name: Run release script
+        # 2.2.2 ==> does not exist on pnc-api-types-ts, but does on the pnc repo
+        run: ./release.sh 6715052687eae63e9b5a9c5538c24814d1bb9660
+        shell: bash

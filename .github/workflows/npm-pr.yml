@@ -1,0 +1,17 @@
+# https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+
+name: Node.js CI with NPM
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  call-npm-ci:
+    uses: project-ncl/shared-github-actions/.github/workflows/npm-ci.yml@153b97777335953545bc8a907eb5f062af66b7f2 # v0.0.18
+    with:
+      build_command: npm install
+      upload_artifacts: true
